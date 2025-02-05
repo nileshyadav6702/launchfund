@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Components/Home/Home'
-import LoginSignup from './Components/Login/Login'
+import Login from './Components/Login_Signup/Login'
+import Signup from './Components/Login_Signup/Signup'
 
 
 const App = () => {
@@ -13,7 +14,11 @@ const App = () => {
     },
     {
       path: '/login',
-      element: <LoginSignup />
+      element: <Login />
+    },
+    {
+      path: '/signup',
+      element: <Signup />
     }
   ]
 
