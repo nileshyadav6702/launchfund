@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Menu, X, Search, User, Rocket } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
+    
     // Function to close the menu
     const closeMenu = () => setIsOpen(false);
 
@@ -40,12 +42,12 @@ const Navbar = () => {
 
             {/* Right Side - Login & Campaign (Hidden on Small Screens) */}
             <div className="hidden lg:flex items-center space-x-4">
-                <a
-                    href="#"
-                    className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 flex items-center gap-1"
+                <button
+                    onClick={() => navigate('/signup')}
+                    className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 flex items-center gap-1 cursor-pointer"
                 >
                     <User size={18} /> Login / Sign up
-                </a>
+                </button>
                 <button className="border border-green-400 text-green-600 px-4 py-2 rounded-md hover:bg-green-400 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-1 cursor-pointer">
                     <Rocket size={18} /> START A CAMPAIGN
                 </button>
@@ -81,13 +83,12 @@ const Navbar = () => {
                 >
                     IndieShop
                 </a>
-                <a
-                    href="#"
-                    className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 flex items-center gap-1"
-                    onClick={closeMenu}
+                <button
+                    onClick={() => navigate('/signup')}
+                    className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 flex items-center gap-1 cursor-pointer"
                 >
                     <User size={18} /> Login / Sign up
-                </a>
+                </button>
                 <button
                     className="border border-green-400 text-green-600 px-4 py-2 rounded-md hover:bg-green-400 hover:text-white transition-all transform hover:scale-105 flex items-center gap-1"
                     onClick={closeMenu}
