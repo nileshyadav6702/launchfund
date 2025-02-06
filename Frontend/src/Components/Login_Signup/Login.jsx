@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 function Login() {
+  const url = "http://localhost:8080";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,11 +15,13 @@ function Login() {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post("https://your-api-endpoint.com/auth", {
+      const response = await axios.post(`${url}/user/signin`, {
         email,
         password,
         isSignup: false,
       });
+      localStorage.setItem('token',response.data.token)
+      navigate("/");
       console.log(response.data);
     } catch (err) {
       setError("Invalid input. Please check your details.");
