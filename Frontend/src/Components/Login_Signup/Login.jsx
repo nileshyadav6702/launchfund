@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { toast, Toaster } from 'react-hot-toast'
 
 function Login() {
   const url = "http://localhost:8080";
@@ -20,10 +21,12 @@ function Login() {
         password,
         isSignup: false,
       });
-      localStorage.setItem('token',response.data.token)
-      navigate("/");
+      localStorage.setItem('token', response.data.token)
+      toast.success("Login successful! Redirecting...");
+      setTimeout(() => navigate("/"), 2000);
       console.log(response.data);
     } catch (err) {
+      toast.error("Invalid input. Please check your details.");
       setError("Invalid input. Please check your details.");
     }
   };
@@ -86,6 +89,10 @@ function Login() {
           </span>
         </p>
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   );
 }
