@@ -13,7 +13,7 @@ async function Signup(req, res) {
 
     }
 
-    bcrypt.hash(password, saltRounds,async function (err, hash) {
+    bcrypt.hash(password, saltRounds,async function (error, hash) {
       // Storing the hasshed password in database
       if(error) return res.status(402).json({msg:"some error occured",error})
       await userModel.create({username,email,password:hash})
@@ -45,7 +45,7 @@ async function Signin(req, res) {
         return res.status(200).json({msg:"user signin successfully",token})
       }
       else{
-        return res.status(401).json({msg:"some error occured please try again"})
+        return res.status(401).json({msg:"password is incorrect!"})
       }
     });
   } catch (err) {
