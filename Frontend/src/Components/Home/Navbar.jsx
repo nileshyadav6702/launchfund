@@ -19,7 +19,7 @@ const Navbar = () => {
         <nav className="bg-white shadow-md px-6 py-3 flex justify-between items-center fixed top-0 w-full z-50">
             {/* Left Side - Logo */}
             <div className="flex items-center space-x-6">
-                <h1 className="text-2xl font-bold text-green-600">LaunchFund</h1>
+                <h1 onClick={() => navigate('/')} className="text-2xl font-bold text-green-600 cursor-pointer">LaunchFund</h1>
                 <div className="hidden lg:flex space-x-4">
                     <button onClick={() => navigate('/explore')}
                         className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 cursor-pointer"
@@ -29,15 +29,15 @@ const Navbar = () => {
                 </div>
             </div>
 
-        {/* Search Bar - Only Visible on Large Screens */}
-        <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-4 py-2">
-          <Search className="text-gray-500 mr-3" size={20} />
-          <input
-            type="text"
-            placeholder="Search crowdfunding..."
-            className="bg-transparent outline-none text-gray-700 lg:w-64 xl:w-80"
-          />
-        </div>
+            {/* Search Bar - Only Visible on Large Screens */}
+            <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-4 py-2">
+                <Search className="text-gray-500 mr-3" size={20} />
+                <input
+                    type="text"
+                    placeholder="Search crowdfunding..."
+                    className="bg-transparent outline-none text-gray-700 lg:w-64 xl:w-80"
+                />
+            </div>
 
             <div className="hidden lg:flex items-center space-x-4">
                 {logedin ? <button
@@ -56,15 +56,15 @@ const Navbar = () => {
                 </button>
             </div>
 
-        {/* Mobile Menu Icon - Only visible on md & sm screens */}
-        <div className="lg:hidden flex items-center justify-center">
-          <button
-            className="text-gray-700 text-2xl cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
-        </div>
+            {/* Mobile Menu Icon - Only visible on md & sm screens */}
+            <div className="lg:hidden flex items-center justify-center">
+                <button
+                    className="text-gray-700 text-2xl cursor-pointer"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? <X size={26} /> : <Menu size={26} />}
+                </button>
+            </div>
 
             {/* Mobile Menu Dropdown (Appears only in sm & md screens) */}
             <div
