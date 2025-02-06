@@ -1,9 +1,13 @@
 import React from "react";
 import Hero_Image from '../../assets/Hero_image.webp'
 import { Rocket } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 const Hero = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-col md:flex-row items-center justify-center px-6 md:px-16 py-16 bg-white h-screen mt-20 md:mt-0">
             {/* Left Content */}
@@ -17,7 +21,7 @@ const Hero = () => {
                 </p>
                 {/* Button - Center on smaller screens */}
                 <div className="mt-6 flex justify-center md:justify-start">
-                    <button className="border border-green-400 text-green-600 px-4 py-2 rounded-md hover:bg-green-400 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-1 cursor-pointer">
+                    <button onClick={() => navigate('/start_campaign')} className="border border-green-400 text-green-600 px-4 py-2 rounded-md hover:bg-green-400 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-1 cursor-pointer">
                         <Rocket size={18} /> START A CAMPAIGN
                     </button>
                 </div>
