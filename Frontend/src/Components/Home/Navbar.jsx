@@ -29,15 +29,15 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Search Bar - Only Visible on Large Screens */}
-            <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-4 py-2">
-                <Search className="text-gray-500 mr-3" size={20} />
-                <input
-                    type="text"
-                    placeholder="Search crowdfunding..."
-                    className="bg-transparent outline-none text-gray-700 lg:w-64 xl:w-80"
-                />
-            </div>
+        {/* Search Bar - Only Visible on Large Screens */}
+        <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-4 py-2">
+          <Search className="text-gray-500 mr-3" size={20} />
+          <input
+            type="text"
+            placeholder="Search crowdfunding..."
+            className="bg-transparent outline-none text-gray-700 lg:w-64 xl:w-80"
+          />
+        </div>
 
             <div className="hidden lg:flex items-center space-x-4">
                 {logedin ? <button
@@ -56,15 +56,15 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Mobile Menu Icon - Only visible on md & sm screens */}
-            <div className="lg:hidden flex items-center justify-center">
-                <button
-                    className="text-gray-700 text-2xl cursor-pointer"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={26} /> : <Menu size={26} />}
-                </button>
-            </div>
+        {/* Mobile Menu Icon - Only visible on md & sm screens */}
+        <div className="lg:hidden flex items-center justify-center">
+          <button
+            className="text-gray-700 text-2xl cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
 
             {/* Mobile Menu Dropdown (Appears only in sm & md screens) */}
             <div
