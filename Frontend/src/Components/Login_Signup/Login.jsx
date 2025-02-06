@@ -27,7 +27,7 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-600 to-green-300 flex items-center justify-center py-10 px-4">
-      <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-lg opacity-90 transform transition-all duration-300 hover:scale-105 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+      <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-xl sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-extrabold text-green-600 tracking-wide">LaunchFund</h1>
           <p className="mt-2 text-lg font-medium text-gray-600">Welcome back! Please login to continue</p>
