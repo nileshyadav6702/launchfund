@@ -5,7 +5,7 @@ const userModel = require("../models/user.model")
 const uploadImage = require("../others/uploadImage")
 const secretkey = process.env.SECRET_KEY;
 
-//create a capaign
+//create a campaign
 async function CreateCampaign(req,res){
     try{
         const {
@@ -42,4 +42,15 @@ async function CreateCampaign(req,res){
     }
 }
 
-module.exports={CreateCampaign}
+//get all the campaign
+async function getallCampaign(req,res){
+  try{
+    const allcampaign=await CampaignModel.find({})
+    res.status(200).json({msg:"all data",data:allcampaign})
+  }
+  catch(err){
+    return res.status(401).json({msg:"some error occured"})
+  }
+}
+
+module.exports={CreateCampaign,getallCampaign}
