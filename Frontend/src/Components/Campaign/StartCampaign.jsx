@@ -4,11 +4,12 @@ import { UploadCloud } from "lucide-react";
 import Navbar from "../Home/Navbar";
 import Footer from "../Home/Footer";
 import axios from "axios";
+import { toast, Toaster } from 'react-hot-toast'
 
 const StartCampaign = () => {
   const url = "http://localhost:8080";
   const [image, setImage] = useState(null);
-  const [base64,setbase64]=useState(null)
+  const [base64, setbase64] = useState(null)
   const [campaignData, setCampaignData] = useState({
     title: "",
     tagline: "",
@@ -58,7 +59,7 @@ const StartCampaign = () => {
 
     // Append image file if exists
     if (image) {
-      formData["image"] =base64; // Append the image file itself
+      formData["image"] = base64; // Append the image file itself
     }
 
     try {
@@ -68,19 +69,43 @@ const StartCampaign = () => {
         },
       });
       console.log("API Response:", response.data);
+      toast('Campaign created successfully!',
+        {
+          icon: '✅',
+          style: {
+            borderRadius: '50px',
+            background: '#000',
+            color: '#fff',
+            minWidth: '300px',
+            maxWidth: '500px',
+            padding: '16px',
+          },
+        });
 
-    //   Clear input fields and image preview after successful submission
+      //   Clear input fields and image preview after successful submission
       setCampaignData({
-          title: "",
-          tagline: "",
-          location: "",
-          category: "",
-          tags: "",
-          goalAmount: 0,
+        title: "",
+        tagline: "",
+        location: "",
+        category: "",
+        tags: "",
+        goalAmount: 0,
       });
       setImage(null); // Clear image
     } catch (error) {
       console.error("Error submitting the campaign:", error);
+      toast('Failed to create campaign. Please try again.', {
+        icon: '❌',
+        style: {
+          borderRadius: '50px',
+          background: '#000',
+          color: '#fff',
+          minWidth: '300px',
+          maxWidth: '500px',
+          padding: '16px',
+        },
+      });
+
     }
   };
 
@@ -104,6 +129,7 @@ const StartCampaign = () => {
               value={campaignData.title}
               onChange={handleChange}
               placeholder="Enter your campaign title"
+              required
               className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring focus:ring-green-600 focus:border-green-600"
             />
           </div>
@@ -118,6 +144,7 @@ const StartCampaign = () => {
               value={campaignData.tagline}
               onChange={handleChange}
               placeholder="Provide a short description"
+              required
               className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring focus:ring-green-600 focus:border-green-600"
             ></textarea>
           </div>
@@ -160,6 +187,7 @@ const StartCampaign = () => {
               value={campaignData.location}
               onChange={handleChange}
               placeholder="Enter campaign location"
+              required
               className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring focus:ring-green-600 focus:border-green-600"
             />
           </div>
@@ -172,6 +200,7 @@ const StartCampaign = () => {
             <select
               name="category"
               value={campaignData.category}
+              required
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring focus:ring-green-600 focus:border-green-600"
             >
@@ -189,6 +218,7 @@ const StartCampaign = () => {
             <input
               type="text"
               name="tags"
+              required
               value={campaignData.tags}
               onChange={handleChange}
               placeholder="Enter up to 5 tags"
@@ -204,6 +234,7 @@ const StartCampaign = () => {
             <input
               type="number"
               name="goalAmount"
+              required
               value={campaignData.goalAmount}
               onChange={handleChange}
               placeholder="Enter goal amount"
@@ -220,6 +251,10 @@ const StartCampaign = () => {
           </button>
         </form>
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <Footer />
     </div>
   );
