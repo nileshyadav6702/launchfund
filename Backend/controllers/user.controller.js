@@ -53,5 +53,26 @@ async function Signin(req, res) {
   }
 }
 
+//all users
+async function allUser(req,res){
+  try{
+    const alluser=await userModel.find({})
+    return res.status(200).json({data:alluser})
+  }
+  catch(error){
+    return res.status(500).json({msg:"some error occured"})
+  }
+}
 
-module.exports={Signup,Signin}
+//get particular user
+async function getparticularuser(req,res){
+  try {
+    const id=req.params.id
+    const user=await userModel.findOne({_id:id})
+    return res.status(200).json({data:user})
+  }
+  catch (error) {
+    return res.status(500).json({ msg: "some error occured" });
+  }
+}
+module.exports = { Signup, Signin, allUser, getparticularuser };

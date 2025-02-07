@@ -14,11 +14,6 @@ const userschema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    campaigns: [
-      {
-        type: mongoose.Types.ObjectId,
-      },
-    ],
     backedcampaigns: [
       {
         campaignid: { type: mongoose.Types.ObjectId },

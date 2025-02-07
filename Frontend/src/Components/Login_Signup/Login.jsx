@@ -5,7 +5,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { toast, Toaster } from 'react-hot-toast'
 
 function Login() {
-  const url = "http://localhost:8080";
+  const url = "https://launchfund.onrender.com";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

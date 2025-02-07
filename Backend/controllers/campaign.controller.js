@@ -53,4 +53,78 @@ async function getallCampaign(req,res){
   }
 }
 
-module.exports={CreateCampaign,getallCampaign}
+//get a campaign by id
+async function getCampaignbyId(req,res){
+  try{
+    const id=req.params.id
+    const campaigndata=await CampaignModel.findOne({_id:id})
+    return res.status(200).json({data:campaigndata})
+  }
+  catch(error){
+    return res.status(401).json({msg:"some error occured"})
+  }
+}
+
+//increase the donated amount
+async function donateAmount(req,res){
+  try{
+    //amount to be donated
+    const amounttoincrease=req.body.amountdonated
+
+    //campaign id
+    const id=req.params.id
+
+    //token of the user donated the amount
+    const token=req.headers.token
+    const user=jwt.verify(token,secretkey)
+    const backedcampaign = {
+      campaignid: id,
+      pledgeAmount: amounttoincrease,
+      pledgedDate:Date.now()
+    };
+    //update the users backed campaign
+    await userModel.update(
+      { _id: user._id },
+      { $push: { backedcampaigns: { ...backedcampaign } } }
+    );
+
+    //who is the backer of this campaign
+    const backer = {
+      userId: user._id,
+      name: user.username,
+      email: user.email,
+      pledgedAmount: amounttoincrease,
+      pledgedDate:Date.now()
+    };
+
+    //update the database
+    await CampaignModel.updateOne(
+      { _id: id },
+      { $inc: { currentAmount: +amounttoincrease } ,$push:{'backers':{...backer}}}
+    );
+    return res.status(200).json({msg:"donated successfully"})
+  }
+  catch(error){
+    return res.status(401).json({msg:"some error occured"})
+  }
+}
+
+//delete a particular campaign
+async function deleteCampaign(req,res){
+  try{
+    const id=req.params.id
+    await CampaignModel.findByIdAndDelete({_id:id})
+    return res.status(200).json({msg:"campaign deleted successfully"})
+  }
+  catch(error){
+    return res.status(500).json({msg:"some error occured"})
+  }
+}
+
+module.exports = {
+  CreateCampaign,
+  getallCampaign,
+  getCampaignbyId,
+  donateAmount,
+  deleteCampaign
+};
