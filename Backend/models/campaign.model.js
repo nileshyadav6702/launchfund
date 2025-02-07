@@ -15,6 +15,7 @@ const campaignSchema = new mongoose.Schema({
   goalAmount: Number,
   currentAmount: {
     type: Number,
+    default:0
   },
   backers: [
     {
