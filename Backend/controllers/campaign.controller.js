@@ -124,7 +124,7 @@ async function commentonCampaign(req,res){
     //push the comment in comment section in database
     await CampaignModel.updateOne(
       { _id: id },
-      { $push: { comments: { userId:user._id,name:user.username,content:content,date:Date.now()} } }
+      { $push: { "comments": { userId:user._id,name:user.username,content:content,date:Date.now()} } }
     );
     return res.status(200).json({msg:"comment executed successfully!"})
   }
