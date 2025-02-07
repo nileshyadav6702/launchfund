@@ -70,10 +70,9 @@ async function donateAmount(req,res){
   try{
     //amount to be donated
     const amounttoincrease=req.body.amountdonated
-
     //campaign id
     const id=req.params.id
-
+    
     //token of the user donated the amount
     const token=req.headers.token
     const user=jwt.verify(token,secretkey)
@@ -83,11 +82,11 @@ async function donateAmount(req,res){
       pledgedDate:Date.now()
     };
     //update the users backed campaign
-    await userModel.update(
+    await userModel.updateOne(
       { _id: user._id },
-      { $push: { backedcampaigns: { ...backedcampaign } } }
+      { $push: { "backedcampaigns": {...backedcampaign } } }
     );
-
+    
     //who is the backer of this campaign
     const backer = {
       userId: user._id,
