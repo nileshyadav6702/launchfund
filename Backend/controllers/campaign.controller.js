@@ -109,6 +109,31 @@ async function donateAmount(req,res){
   }
 }
 
+//comment on the campaign
+async function commentonCampaign(req,res){
+  try{
+    //amount to be donated
+    const content = req.body.content;
+
+    //campaign id
+    const id = req.params.id;
+
+    //token of the user donated the amount
+    const token = req.headers.token;
+    const user = jwt.verify(token, secretkey);
+
+    //push the comment in comment section in database
+    await CampaignModel.updateOne(
+      { _id: id },
+      { $push: { comments: { userId:user._id,name:user.username,content:content,date:Date.now()} } }
+    );
+    return res.status(200).json({msg:"comment executed successfully!"})
+  }
+  catch(error){
+    return res.status(500).json({msg:"some error occured"})
+  }
+}
+
 //delete a particular campaign
 async function deleteCampaign(req,res){
   try{
@@ -126,5 +151,6 @@ module.exports = {
   getallCampaign,
   getCampaignbyId,
   donateAmount,
-  deleteCampaign
+  deleteCampaign,
+  commentonCampaign,
 };

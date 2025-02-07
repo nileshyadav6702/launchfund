@@ -5,6 +5,7 @@ const {
   getCampaignbyId,
   donateAmount,
   deleteCampaign,
+  commentonCampaign,
 } = require("../controllers/campaign.controller");
 const CampaignRoute=express.Router()
 
@@ -19,6 +20,10 @@ CampaignRoute.get("/get/:id",getCampaignbyId)
 
 //increase the amount of the campaign
 CampaignRoute.put("/donate/:id",donateAmount)
+
+//comment on the campaign
+CampaignRoute.put("/comment/:id", commentonCampaign);
+
 
 //delete a particular campaign
 CampaignRoute.delete("/:id",deleteCampaign)
