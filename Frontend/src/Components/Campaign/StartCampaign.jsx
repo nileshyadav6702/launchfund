@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast, Toaster } from 'react-hot-toast'
 
 const StartCampaign = () => {
-  const url = "http://localhost:8080";
+  const url = "https://launchfund.onrender.com";
   const [image, setImage] = useState(null);
   const [base64, setbase64] = useState(null)
   const [campaignData, setCampaignData] = useState({
@@ -45,6 +45,19 @@ const StartCampaign = () => {
   };
 
   const handleSubmit = async (e) => {
+    if(!localStorage.getItem('token')){
+      toast("Please sign in first!", {
+        icon: "✅",
+        style: {
+          borderRadius: "50px",
+          background: "#000",
+          color: "#fff",
+          minWidth: "300px",
+          maxWidth: "500px",
+          padding: "16px",
+        },
+      });
+    }
     e.preventDefault();
 
     // Create FormData to handle image upload
