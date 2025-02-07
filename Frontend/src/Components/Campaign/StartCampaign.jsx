@@ -5,11 +5,13 @@ import Navbar from "../Home/Navbar";
 import Footer from "../Home/Footer";
 import axios from "axios";
 import { toast, Toaster } from 'react-hot-toast'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const StartCampaign = () => {
   const url = "https://launchfund.onrender.com";
   const [image, setImage] = useState(null);
-  const [base64, setbase64] = useState(null)
+  const [base64, setbase64] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [campaignData, setCampaignData] = useState({
     title: "",
     tagline: "",
@@ -45,23 +47,15 @@ const StartCampaign = () => {
   };
 
   const handleSubmit = async (e) => {
-    if(!localStorage.getItem('token')){
-      toast("Please sign in first!", {
-        icon: "✅",
-        style: {
-          borderRadius: "50px",
-          background: "#000",
-          color: "#fff",
-          minWidth: "300px",
-          maxWidth: "500px",
-          padding: "16px",
-        },
-      });
-    }
     e.preventDefault();
 
+    if (!localStorage.getItem('token')) {
+      toast.error("Please sign in first!")
+      return;
+    }
+
+    setLoading(true);
     // Create FormData to handle image upload
-    // const formData = new FormData();
     const formData = {};
     formData["title"] = campaignData.title;
     formData["tagline"] = campaignData.tagline;
@@ -82,18 +76,7 @@ const StartCampaign = () => {
         },
       });
       console.log("API Response:", response.data);
-      toast('Campaign created successfully!',
-        {
-          icon: '✅',
-          style: {
-            borderRadius: '50px',
-            background: '#000',
-            color: '#fff',
-            minWidth: '300px',
-            maxWidth: '500px',
-            padding: '16px',
-          },
-        });
+      toast.success('Campaign created successfully!')
 
       //   Clear input fields and image preview after successful submission
       setCampaignData({
@@ -107,18 +90,9 @@ const StartCampaign = () => {
       setImage(null); // Clear image
     } catch (error) {
       console.error("Error submitting the campaign:", error);
-      toast('Failed to create campaign. Please try again.', {
-        icon: '❌',
-        style: {
-          borderRadius: '50px',
-          background: '#000',
-          color: '#fff',
-          minWidth: '300px',
-          maxWidth: '500px',
-          padding: '16px',
-        },
-      });
-
+      toast.error('Failed to create campaign. Please try again.')
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -258,9 +232,10 @@ const StartCampaign = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-48 bg-green-600 text-white py-3 rounded-md text-lg font-medium hover:bg-green-700 transition cursor-pointer"
+            className="w-48 bg-green-600 text-white py-3 rounded-md text-lg font-medium hover:bg-green-700 transition cursor-pointer flex justify-center items-center"
+            disabled={loading}
           >
-            Save & Continue
+            {loading ? <ClipLoader color="#fff" size={20} /> : "Save & Continue"}
           </button>
         </form>
       </div>
