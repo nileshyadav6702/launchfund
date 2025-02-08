@@ -7,6 +7,7 @@ import StartCampaign from './Components/Campaign/StartCampaign'
 import CampaignList from './Components/Campaign/CampaignList'
 import CampaignDetails from './Components/Campaign/CampaignDetails'
 import MyCampaigns from './Components/Campaign/MyCampaigns'
+import MyCampaignsAnalytics from './Components/Campaign/MyCampaignsAnalytics'
 
 
 const App = () => {
@@ -39,6 +40,10 @@ const App = () => {
     {
       path: '/my-campaigns',
       element: <MyCampaigns />
+    },
+    {
+      path: '/my-campaigns/analytics/:campaignId',
+      element: <MyCampaignsAnalytics />
     }
   ]
 
