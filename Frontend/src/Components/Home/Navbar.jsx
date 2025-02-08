@@ -12,7 +12,9 @@ const Navbar = () => {
     const {query,setquery}=useContext(DataContext)
     //user searching
     function usersearch(value){
-        navigate(`/explore`)
+        if(window.location.pathname!='/explore'){
+            navigate(`/explore`)
+        }
         setquery(value)
     }
 
