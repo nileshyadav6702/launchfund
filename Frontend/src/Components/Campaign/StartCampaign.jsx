@@ -202,6 +202,7 @@ const StartCampaign = () => {
               <option value="Art">Art</option>
               <option value="Environment">Environment</option>
               <option value="Wildlife">Wildlife</option>
+              <option value="Community">Community</option>
             </select>
           </div>
 
