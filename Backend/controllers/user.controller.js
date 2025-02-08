@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
+const CampaignModel = require("../models/campaign.model");
 const saltRounds = 10;
 const secretkey=process.env.SECRET_KEY
 
@@ -75,4 +76,27 @@ async function getparticularuser(req,res){
     return res.status(500).json({ msg: "some error occured" });
   }
 }
-module.exports = { Signup, Signin, allUser, getparticularuser };
+
+//see all the campaign by a particular campaign
+async function allcampaign(req,res){
+  try{
+    //get the token
+    const token=req.headers.token
+
+    //decoded the token
+    const decoded=jwt.verify(token,secretkey)
+
+    //get the user
+    const user=await userModel.findOne({email:decoded.email})
+
+    //get all the campaign by that user
+    const campaigns=await CampaignModel.find({'creator.userId':user._id})
+
+    return res.status(200).json({allcampaigns:campaigns})
+  }
+  catch(error){
+    return res.status(500).json({msg:"error occured"})
+  }
+}
+
+module.exports = { Signup, Signin, allUser, getparticularuser, allcampaign };
