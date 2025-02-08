@@ -99,4 +99,26 @@ async function allcampaign(req,res){
   }
 }
 
-module.exports = { Signup, Signin, allUser, getparticularuser, allcampaign };
+// get the analatics of the campaign
+async function getanalatics(req,res){
+  try{
+    //campaign id
+    const campaignid=req.params.id
+
+    const campaigndetail=await CampaignModel.find({_id:campaignid})
+    return res.status(200).json({campaigndetail})
+
+  }
+  catch(error){
+    return res.status(500).json({msg:"some error occured"})
+  }
+}
+
+module.exports = {
+  Signup,
+  Signin,
+  allUser,
+  getparticularuser,
+  allcampaign,
+  getanalatics,
+};
