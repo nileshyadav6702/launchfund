@@ -5,7 +5,7 @@ LaunchFund is a modern crowdfunding platform that enables users to create and ma
 ## 🚀 Live Demo
 [LaunchFund link ](https://launchfund.netlify.app/)
 
-![Homepage Screenshot](C:\Users\Yash\OneDrive\Desktop\basics\launchfund\homepage.png)
+![Homepage Screenshot](launchfund\homepage.png)
 
 ## 🛠️ Tech Stack
 ### Frontend:
