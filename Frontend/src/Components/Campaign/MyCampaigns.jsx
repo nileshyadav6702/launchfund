@@ -72,11 +72,14 @@ const MyCampaigns = () => {
                                 key={campaign._id}
                                 className="bg-gradient-to-br from-black to-gray-600 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 flex flex-col min-h-[350px] relative overflow-hidden"
                             >
+                                <div className='overflow-hidden w-full h-48 rounded-xl mb-3'>
                                 <img
                                     src={campaign.image}
                                     alt="Campaign"
                                     className="h-48 w-full object-cover rounded-xl mb-6 transition-transform duration-500 transform hover:scale-110"
                                 />
+
+                                </div>
                                 <h2 className="text-3xl font-semibold text-white mb-4">{campaign.title}</h2>
                                 <p className="text-gray-100 text-lg mb-6">{campaign.description}</p>
                                 <p className="text-gray-200 text-sm mb-8">
