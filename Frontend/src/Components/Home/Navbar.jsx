@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu, X, Search, User, Rocket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../Datacontext";
 
 const Navbar = () => {
     const [logedin, setlogedin] = useState(
@@ -8,6 +9,12 @@ const Navbar = () => {
     );
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const {query,setquery}=useContext(DataContext)
+    //user searching
+    function usersearch(value){
+        navigate(`/explore`)
+        setquery(value)
+    }
 
     //Function to logout
     const logout = () => {
@@ -40,6 +47,8 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-4 py-2">
                 <Search className="text-gray-500 mr-3" size={20} />
                 <input
+                    value={query}
+                    onChange={(e)=>usersearch(e.target.value)}
                     type="text"
                     placeholder="Search crowdfunding..."
                     className="bg-transparent outline-none text-gray-700 lg:w-64 xl:w-80"

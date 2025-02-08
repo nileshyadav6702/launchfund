@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../Home/Navbar";
 import Footer from "../Home/Footer";
 import { MapPin, Tag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {DataContext} from "../Datacontext";
 
 const CampaignsList = () => {
   const url = "https://launchfund.onrender.com";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {query}=useContext(DataContext)
 
+  
   const handleCardClick = (campaignId) => {
     navigate(`/campaign/${campaignId}`);
   };
@@ -18,7 +21,7 @@ const CampaignsList = () => {
   const getData = async () => {
     try {
       let campaignData = await axios.get(`${url}/campaign/get`);
-      setData(campaignData.data.data);
+      setData(campaignData.data.data.filter(item=>item.title.toLowerCase().includes(query.toLowerCase())));
     } catch (error) {
       console.error("Error fetching campaign data:", error);
     } finally {
@@ -26,9 +29,15 @@ const CampaignsList = () => {
     }
   };
 
+  let timer
   useEffect(() => {
-    getData();
-  }, []);
+    setLoading(true)
+    clearTimeout(timer)
+    timer=setTimeout(()=>{
+      getData();
+      setLoading(false)
+    },1000)
+  }, [query]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-green-200 text-gray-900">
