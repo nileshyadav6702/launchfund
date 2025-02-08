@@ -26,6 +26,13 @@ const Navbar = () => {
                     >
                         Explore
                     </button>
+                    {localStorage.getItem("token") &&
+                        <button onClick={() => navigate('/my-campaigns')}
+                            className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 cursor-pointer"
+                        >
+                            My Campaigns
+                        </button>
+                    }
                 </div>
             </div>
 
@@ -78,6 +85,13 @@ const Navbar = () => {
                 >
                     Explore
                 </button>
+                {localStorage.getItem("token") &&
+                    <button onClick={() => navigate('/my-campaigns')}
+                        className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 cursor-pointer"
+                    >
+                        My Campaigns
+                    </button>
+                }
                 {logedin ? <button
                     onClick={() => logout()}
                     className="text-gray-700 hover:text-green-500 transition-transform transform hover:scale-105 flex items-center gap-1 cursor-pointer"

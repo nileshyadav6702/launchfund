@@ -6,6 +6,7 @@ import Footer from "../Home/Footer";
 import axios from "axios";
 import { toast, Toaster } from 'react-hot-toast'
 import ClipLoader from "react-spinners/ClipLoader";
+import { useNavigate } from "react-router-dom";
 
 const StartCampaign = () => {
   const url = "https://launchfund.onrender.com";
@@ -20,6 +21,8 @@ const StartCampaign = () => {
     tags: "",
     goalAmount: 0,
   });
+
+  let navigate = useNavigate();
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -88,6 +91,7 @@ const StartCampaign = () => {
         goalAmount: 0,
       });
       setImage(null); // Clear image
+      setTimeout(() => navigate("/explore"), 2000);
     } catch (error) {
       console.error("Error submitting the campaign:", error);
       toast.error('Failed to create campaign. Please try again.')
@@ -196,6 +200,8 @@ const StartCampaign = () => {
               <option value="Health">Health</option>
               <option value="Education">Education</option>
               <option value="Art">Art</option>
+              <option value="Environment">Environment</option>
+              <option value="Wildlife">Wildlife</option>
             </select>
           </div>
 

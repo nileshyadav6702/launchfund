@@ -2,20 +2,24 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
-import { toast, Toaster } from 'react-hot-toast'
+import { toast, Toaster } from "react-hot-toast";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Signup() {
   const url = "https://launchfund.onrender.com";
   const [email, setEmail] = useState("");
-  const [username, setusername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true); // Start loading
+
     try {
       const response = await axios.post(`${url}/user/signup`, {
         username,
@@ -23,12 +27,20 @@ function Signup() {
         password,
         isSignup: true,
       });
+
       toast.success("Account created successfully!");
+
+      setUsername("");
+      setEmail("");
+      setPassword("");
+
       setTimeout(() => navigate("/login"), 2000);
       console.log(response.data);
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
       setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -55,7 +67,7 @@ function Signup() {
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(e) => setusername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-200"
               required
             />
@@ -98,9 +110,14 @@ function Signup() {
 
           <button
             type="submit"
-            className="w-full py-3 text-white font-semibold bg-green-600 rounded-md hover:bg-green-500 transition duration-200 cursor-pointer"
+            className="w-full py-3 text-white font-semibold bg-green-600 rounded-md hover:bg-green-500 transition duration-200 cursor-pointer flex items-center justify-center"
+            disabled={loading}
           >
-            Create Account
+            {loading ? (
+              <ClipLoader color="#fff" size={20} />
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
 
@@ -114,10 +131,7 @@ function Signup() {
           </span>
         </p>
       </div>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
