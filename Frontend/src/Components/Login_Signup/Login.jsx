@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { toast, Toaster } from 'react-hot-toast'
+import { toast, Toaster } from 'react-hot-toast';
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Login() {
   const url = "https://launchfund.onrender.com";
@@ -10,24 +11,33 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Added state for loading
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true); // Show loader while request is processing
+
     try {
       const response = await axios.post(`${url}/user/signin`, {
         email,
         password,
         isSignup: false,
       });
-      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('token', response.data.token);
       toast.success("Login successful! Redirecting...");
+
+      setEmail("");
+      setPassword("");
+
       setTimeout(() => navigate("/"), 2000);
       console.log(response.data);
     } catch (err) {
       toast.error("Invalid input. Please check your details.");
       setError("Invalid input. Please check your details.");
+    } finally {
+      setLoading(false); // Hide loader after response
     }
   };
 
@@ -76,9 +86,10 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full py-3 text-white font-semibold bg-green-600 rounded-md hover:bg-green-500 transition duration-200 cursor-pointer"
+            className="w-full py-3 text-white font-semibold bg-green-600 rounded-md hover:bg-green-500 transition duration-200 cursor-pointer flex items-center justify-center"
+            disabled={loading} // Disable button when loading
           >
-            Login
+            {loading ? <ClipLoader size={20} color="#fff" /> : "Login"}
           </button>
         </form>
 
@@ -89,10 +100,7 @@ function Login() {
           </span>
         </p>
       </div>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

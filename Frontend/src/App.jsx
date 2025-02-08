@@ -6,6 +6,7 @@ import Signup from './Components/Login_Signup/Signup'
 import StartCampaign from './Components/Campaign/StartCampaign'
 import CampaignList from './Components/Campaign/CampaignList'
 import CampaignDetails from './Components/Campaign/CampaignDetails'
+import MyCampaigns from './Components/Campaign/MyCampaigns'
 
 
 const App = () => {
@@ -34,6 +35,10 @@ const App = () => {
     {
       path: '/campaign/:id',
       element: <CampaignDetails />
+    },
+    {
+      path: '/my-campaigns',
+      element: <MyCampaigns />
     }
   ]
 
