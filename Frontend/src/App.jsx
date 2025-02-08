@@ -8,7 +8,7 @@ import CampaignList from './Components/Campaign/CampaignList'
 import CampaignDetails from './Components/Campaign/CampaignDetails'
 import MyCampaigns from './Components/Campaign/MyCampaigns'
 import MyCampaignsAnalytics from './Components/Campaign/MyCampaignsAnalytics'
-
+import {Dataprovider} from './Components/Datacontext'
 
 const App = () => {
 
@@ -49,6 +49,7 @@ const App = () => {
 
   return (
     <div>
+      <Dataprovider>
       <Routes>
         {
           routeData.map((route) => {
@@ -58,6 +59,8 @@ const App = () => {
           })
         }
       </Routes>
+
+      </Dataprovider>
     </div>
   )
 }

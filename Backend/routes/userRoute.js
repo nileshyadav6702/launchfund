@@ -5,6 +5,7 @@ const {
   allUser,
   getparticularuser,
   allcampaign,
+  getanalatics,
 } = require("../controllers/user.controller");
 const UserRoute=express.Router()
 
@@ -24,4 +25,6 @@ UserRoute.get("/get/:id", getparticularuser);
 //get all the campaign created by particular user
 UserRoute.get("/allcampaign",allcampaign)
 
+//get the analatics of the campaign
+UserRoute.get("/allcampaign/analatics/:id",getanalatics)
 module.exports=UserRoute
