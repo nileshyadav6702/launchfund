@@ -21,7 +21,6 @@ launchfund/
 │  ├─ controllers/
 │  │  ├─ campaign.controller.js
 │  │  ├─ user.controller.js
-
 │  ├─ models/ 
 │  │  ├─ campaign.model.js
 │  │  ├─ user.model.js
