@@ -100,7 +100,7 @@ const CampaignsList = () => {
                       </button>
 
                     </div>
-                    <div className="mt-4 w-full h-2 bg-gray-400 rounded-3xl">
+                    <div className="mt-4 w-full h-2 bg-gray-400 rounded-3xl overflow-hidden">
                       <div
                         style={{ width: `${((campaign.currentAmount ? campaign.currentAmount : 0) / campaign.goalAmount) * 100}%` }}
                         className="h-2 rounded-3xl bg-green-600"
