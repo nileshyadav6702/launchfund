@@ -98,7 +98,7 @@ const MyCampaignsAnalytics = () => {
                             <p className="text-xl font-semibold text-green-500">Raised: ₹{campaign.currentAmount}</p>
 
                             {/* Progress Bar */}
-                            <div className="w-full bg-gray-600 rounded-full h-2 mt-3">
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-3 overflow-hidden">
                                 <div
                                     className="bg-gradient-to-r from-green-500 to-teal-400 h-2 rounded-full transition-all duration-500"
                                     style={{ width: `${progress}%` }}
